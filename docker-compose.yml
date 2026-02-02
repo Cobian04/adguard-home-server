@@ -1,0 +1,16 @@
+version: "3"
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    restart: unless-stopped
+    # Mapeo de volúmenes para que la configuración no se borre al reiniciar
+    volumes:
+      - ./workdir:/opt/adguardhome/work
+      - ./confdir:/opt/adguardhome/conf
+    # Puertos clave: 53 (DNS), 80 (Web Admin), 3000 (Setup inicial)
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80/tcp"
+      - "3000:3000/tcp"
